@@ -7,3 +7,9 @@ gulp.task('sass', function() {
     .pipe(sass())
     .pipe(gulp.dest('dist/'))
 })
+
+gulp.task('copy', function() {
+  gulp.src('src/*.html').pipe(gulp.dest('dist/'))
+})
+
+gulp.task('default', ['sass', 'copy'])
