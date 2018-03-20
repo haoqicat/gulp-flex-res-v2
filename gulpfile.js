@@ -1,6 +1,19 @@
 const gulp = require('gulp')
 const sass = require('gulp-sass')
 const autoprefixer = require('gulp-autoprefixer')
+const imagemin = require('gulp-imagemin')
+const pngquant = require('imagemin-pngquant')
+
+gulp.task('imagemin', function() {
+  return gulp
+    .src('src/img/*')
+    .pipe(
+      imagemin({
+        use: [pngquant()]
+      })
+    )
+    .pipe(gulp.dest('dist/img'))
+})
 
 gulp.task('sass', function() {
   gulp
