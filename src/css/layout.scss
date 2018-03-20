@@ -7,6 +7,43 @@
     flex-shrink: 0;
     background-color: $primary-color;
     border-bottom: 2px solid $accent-color;
+    display: flex;
+    color: white;
+    padding: 25px 10px;
+    svg {
+      fill: white;
+    }
+    .button {
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 3px;
+    }
+    .back {
+      display: flex;
+      padding: 8px;
+      height: 30px;
+      line-height: 16px;
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+      .text {
+        margin-left: 5px;
+      }
+    }
+    .title {
+      color: white;
+      line-height: 30px;
+      font-size: 19px;
+      text-align: center;
+      flex-grow: 1;
+    }
+    .settings {
+      padding: 5px;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
   }
   .content {
     flex-grow: 1;
@@ -15,6 +52,29 @@
   .footer {
     height: 80px;
     flex-shrink: 0;
+    display: flex;
     background-color: $primary-color;
+    a {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding-top: 10px;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.5);
+      flex-grow: 1;
+      border-left: 2px solid rgba(0, 0, 0, 0.1);
+      flex-grow: 1;
+      color: white;
+      &:first-child {
+        border-left: 0;
+      }
+      svg {
+        margin: 10px auto;
+        fill: #fff;
+        width: 20px;
+        height: 20px;
+        filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.9));
+      }
+    }
   }
 }
