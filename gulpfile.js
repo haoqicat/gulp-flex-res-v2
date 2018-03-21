@@ -3,11 +3,19 @@ const sass = require('gulp-sass')
 const autoprefixer = require('gulp-autoprefixer')
 const imagemin = require('gulp-imagemin')
 const pngquant = require('imagemin-pngquant')
+const wrap = require('gulp-wrap')
 
 function handleError(err) {
   console.log(err.toString())
   this.emit('end')
 }
+
+gulp.task('build', function() {
+  gulp
+    .src('src/pages/*.html')
+    .pipe(wrap({ src: 'src/layout/default.html' }))
+    .pipe(gulp.dest('dist/'))
+})
 
 gulp.task('imagemin', function() {
   return gulp
@@ -38,8 +46,8 @@ gulp.task('copy', function() {
 })
 
 gulp.task('watch', function() {
-  gulp.watch(['src/*.html'], ['copy'])
+  gulp.watch(['src/**/*.html'], ['build'])
   gulp.watch(['src/css/*.scss'], ['sass'])
 })
 
-gulp.task('default', ['sass', 'copy', 'watch'])
+gulp.task('default', ['sass', 'build', 'watch'])
