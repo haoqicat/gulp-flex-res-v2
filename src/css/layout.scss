@@ -48,6 +48,8 @@
   .content {
     flex-grow: 1;
     overflow: scroll;
+    padding: 0;
+    position: relative;
   }
   .footer {
     .title {
