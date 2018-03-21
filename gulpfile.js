@@ -4,11 +4,20 @@ const autoprefixer = require('gulp-autoprefixer')
 const imagemin = require('gulp-imagemin')
 const pngquant = require('imagemin-pngquant')
 const wrap = require('gulp-wrap')
+const browserSync = require('browser-sync')
 
 function handleError(err) {
   console.log(err.toString())
   this.emit('end')
 }
+
+gulp.task('browser-sync', ['build', 'sass'], function() {
+  browserSync({
+    server: {
+      baseDir: 'dist'
+    }
+  })
+})
 
 gulp.task('build', function() {
   gulp
@@ -39,6 +48,7 @@ gulp.task('sass', function() {
       })
     )
     .pipe(gulp.dest('dist/'))
+    .pipe(browserSync.reload({ stream: true }))
 })
 
 gulp.task('copy', function() {
@@ -46,8 +56,12 @@ gulp.task('copy', function() {
 })
 
 gulp.task('watch', function() {
-  gulp.watch(['src/**/*.html'], ['build'])
+  gulp.watch(['src/**/*.html'], ['rebuild'])
   gulp.watch(['src/css/*.scss'], ['sass'])
 })
 
-gulp.task('default', ['sass', 'build', 'watch'])
+gulp.task('rebuild', ['build'], function() {
+  browserSync.reload()
+})
+
+gulp.task('default', ['browser-sync', 'watch'])
