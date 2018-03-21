@@ -11,7 +11,7 @@ function handleError(err) {
   this.emit('end')
 }
 
-gulp.task('browser-sync', ['build', 'sass'], function() {
+gulp.task('browser-sync', ['build', 'sass', 'copy'], function() {
   browserSync({
     server: {
       baseDir: 'dist'
@@ -52,12 +52,13 @@ gulp.task('sass', function() {
 })
 
 gulp.task('copy', function() {
-  gulp.src('src/*.html').pipe(gulp.dest('dist/'))
+  gulp.src('src/main.js').pipe(gulp.dest('dist/'))
 })
 
 gulp.task('watch', function() {
   gulp.watch(['src/**/*.html'], ['rebuild'])
   gulp.watch(['src/css/*.scss'], ['sass'])
+  gulp.watch(['src/main.js'], ['copy'])
 })
 
 gulp.task('rebuild', ['build'], function() {
